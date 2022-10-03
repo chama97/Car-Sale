@@ -23,7 +23,8 @@ export default function Login({navigation}) {
                 navigation.navigate("Home")
                 Alert.alert("Save Saved Successfully !")
             })
-            .catch((err)=>{Alert.alert("Error occured !")})
+            .catch((err)=>{navigation.navigate("Home")
+                Alert.alert("Error occured !")})
     }
 
   return (
