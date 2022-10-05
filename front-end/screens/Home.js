@@ -4,34 +4,46 @@ import React, { useEffect, useState } from 'react'
 
 
 export default function Home({navigation}) {
+
+    const [cars, setCars] = useState([]);
+
+    useEffect(() => {
+        fetch('http://192.168.8.166:4000/cars')
+            .then((response) => response.json())
+            .then((json) => setCars(json));
+    })
+
   return (
-    <ScrollView style={{padding:50,backgroundColor:'#ecf0f4'}}>
-        <NativeBaseProvider>
+    <NativeBaseProvider>
+        <View style={{padding:50,backgroundColor:'#ecf0f4'}}>
             <View style={{marginBottom:30}}>
-                <Button style={{height:50}} onPress={()=>{navigation.navigate("Car")}} >
+                <Button style={{height:50}} onPress={()=>{navigation.navigate("Cars")}} >
                     Add New Vehicle
                 </Button>
             </View>
-        </NativeBaseProvider>
-
-        <View style={styles.container}>
-            <View style={{flex:2, flexDirection: "row" ,backgroundColor:'#fff', alignItems:'center', justifyContent:'space-around'}}>
-                <Text style={{fontWeight:'bold',fontSize:17}} >BMW 760L</Text>
-                <Text style={{fontSize:17, color:'green'}} >Rs: 25000000</Text>
-            </View>
-            <View style={{flex:6,  backgroundColor:'#e600e6'}}>
-                <TouchableOpacity style={{height:'100%', backgroundColor:'#ffff'}} onPress={()=>{console.log("hello");}}>
-                    <Image source = {{uri:'https://images.hindustantimes.com/auto/img/2022/01/15/1600x900/Lamborghini_1642220975552_1642220982866.jpg'}}
-                        style = {{ width: '100%', height: '100%' }}
-                    />
-                </TouchableOpacity>
-            </View>
-            <View style={{flex:2,  backgroundColor:'#fff', alignItems:'center', justifyContent:'center'}}>
-                <Text style={{marginBottom:10, fontSize:14}} >Asdw aas ssss ffedwd dwdw csdsdc</Text>
-            </View>
-        </View>
-
-    </ScrollView>
+            <FlatList
+                data={cars}
+                renderItem={({ item }) =>
+                <View style={styles.container}>
+                    <View style={{flex:2, flexDirection: "row" ,backgroundColor:'#fff', alignItems:'center', justifyContent:'space-around'}}>
+                        <Text style={{fontWeight:'bold',fontSize:17}} >{item.type}</Text>
+                        <Text style={{fontSize:17, color:'green'}} >{item.price}</Text>
+                    </View>
+                    <View style={{flex:6,  backgroundColor:'#e600e6'}}>
+                        <TouchableOpacity style={{height:'100%', backgroundColor:'#ffff'}} onPress={()=>{console.log("hello");}}>
+                            <Image source = {{uri:item.photo}}
+                                style = {{ width: '100%', height: '100%' }}
+                            />
+                        </TouchableOpacity>
+                    </View>
+                    <View style={{flex:2,  backgroundColor:'#fff', alignItems:'center', justifyContent:'center'}}>
+                        <Text style={{marginBottom:10, fontSize:14}} >{item.description}</Text>
+                    </View>
+                </View>
+                }
+            />
+    </View>
+    </NativeBaseProvider>
   )
 }
 
@@ -40,7 +52,7 @@ const styles = StyleSheet.create({
         height:250,
         borderRadius: 5,    
         marginBottom:'6%', 
-        elevation: 5,
+        elevation: 6,
         shadowColor: '#52006A',
     },
    

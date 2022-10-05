@@ -2,7 +2,8 @@ const express = require('express')
 const mongoose = require('mongoose')
 const user = require('./routes/user')
 const login = require('./routes/login')
-const car = require('./routes/car')
+// const car = require('./routes/car')
+const cars = require('./routes/cars')
 
 const app = express()
 const port =  4000;
@@ -27,7 +28,8 @@ app.use(function (req, res, next) {
 
 app.use('/user', user)
 app.use('/login', login)
-app.use('/car', car)
+// app.use('/car', car)
+app.use('/cars', cars)
 
 
 app.listen(port, () => {

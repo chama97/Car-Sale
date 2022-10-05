@@ -1,23 +1,9 @@
 const express = require('express')
 const app = express()
 const router = express.Router()
-const Cars = require('../models/car.models')
-
-const multer  = require('multer')
+const Cars = require('../models/cars.models')
 
 app.use(express.json())
-
-const Storage = multer.diskStorage({
-    destination:'F:/WorkArea/CarSale/back-end/uploads',
-    filename: (req, file, cb) => {
-        cb(null, file.originalname);
-    },
-});
-
-const uploads = multer({
-    storage: Storage
-}).single('testImage')
-
 
 router.get('/', async (req, res) => {
     try {
@@ -30,27 +16,19 @@ router.get('/', async (req, res) => {
 
 
 router.post('/',async(req, res) => {
-    uploads(req,res,(err)=> {
-        if (err) {
-            console.log(err);
-        } else {
-            const cars = new Cars({
-                type: req.body.type,
-                description: req.body.description,
-                price: req.body.price,
-                image:{
-                    data: req.file.filename,
-                    contentType: 'image/png'
-                } 
-            })
-            cars.save()
-                .then(() => {
-                    res.send("Car uploaded successfully");
-                }).catch((err) => {
-                res.send("Not uploaded");
-            })
-        }
+    const cars = new Cars({
+        type: req.body.type,
+        description: req.body.description,
+        price: req.body.price,
+        photo: req.body.photo
     })
+    try {
+        const response = await cars.save()
+        res.status(200).send({ message: "Success" });
+        // res.json(response)
+    } catch(err) {
+        res.send('Err: ' + err)
+    }
 })
 
 

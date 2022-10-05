@@ -4,33 +4,30 @@ import { NativeBaseProvider, Text, Input, VStack, HStack, Button } from 'native-
 import { Alert } from 'react-native';
 import { launchImageLibrary} from 'react-native-image-picker';
 
-export default function Car() {
+
+export default function Cars() {
+
     const [type, setType] = useState('');
     const [price, setPrice] = useState('');
     const [description, setDescription] = useState('');
-    const [photo, setPhoto] = useState([0]);
-
+    const [photo, setPhoto] = useState('');
+    const [photos, setPhotos] = useState('');
 
     const saveData = () => {
-
-        const data = new FormData();
-        data.append('type', type);
-        data.append('description', description);
-        data.append('price', price);
-        data.append('testImage', photo);
-
-        fetch('http://192.168.8.166:4000/car', {
+        fetch('http://192.168.8.166:4000/cars', {
             method: 'POST',
-            body: data,
+            body: JSON.stringify({
+                type: type,
+                description: description,
+                price: price,
+                photo: photos,
+            }),
             headers: {
-                'Content-Type': 'multipart/form-data',
+                'Content-type': 'application/json; charset=UTF-8',
             },
         })
-        .then((response) => {
-            //clearData();
-            Alert.alert("Car Saved Successfully !")
-        })
-        .catch((err)=>{Alert.alert("Error occured !")})
+            .then((response) => {Alert.alert("Save Saved Successfully !")})
+            .catch((err)=>{Alert.alert("Error occured !")})
     }
 
     const setToastMessege = msg => {
@@ -54,6 +51,7 @@ export default function Car() {
                 Alert.alert('Maximum image size exeeded')
             }else{
                 setPhoto(response.assets[0].base64);
+                setPhotos('https://upload.wikimedia.org/wikipedia/commons/b/b4/Toyota_PREMIO_1.5F_L_Package.jpg');
             }
         });
     }
