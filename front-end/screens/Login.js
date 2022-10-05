@@ -9,7 +9,7 @@ export default function Login({navigation}) {
 
 
     const checkLogin = () => {
-        fetch('http://localhost:4000/user', {
+        fetch('http://192.168.8.166:4000/user', {
             method: 'POST',
             body: JSON.stringify({
                 name: userName,
@@ -23,8 +23,9 @@ export default function Login({navigation}) {
                 navigation.navigate("Home")
                 Alert.alert("Save Saved Successfully !")
             })
-            .catch((err)=>{navigation.navigate("Home")
-                Alert.alert("Error occured !")})
+            .catch((err)=>{
+                Alert.alert("Error occured !")
+            })
     }
 
   return (

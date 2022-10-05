@@ -12,9 +12,8 @@ export default function Sign({navigation}) {
     const [password, setPassword] = useState('');
     const [contact, setContact] = useState('');
 
-
     const saveData = () => {
-        fetch('http://localhost:4000/user', {
+        fetch('http://192.168.8.166:4000/user', {
             method: 'POST',
             body: JSON.stringify({
                 name: name,
@@ -27,8 +26,19 @@ export default function Sign({navigation}) {
                 'Content-type': 'application/json; charset=UTF-8',
             },
         })
-            .then((response) => {Alert.alert("Save Saved Successfully !")})
-            .catch((err)=>{Alert.alert("Error occured !")})
+        .then((response) => {
+            Alert.alert('success')
+            clearData()
+        })
+        .catch((error)=> Alert.alert('error'))
+    }
+
+    const clearData = () => {
+        setName('');
+        setAddress('');
+        setEmail('');
+        setPassword('');
+        setContact('');
     }
 
   return (

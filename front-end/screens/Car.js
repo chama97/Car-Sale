@@ -7,9 +7,9 @@ import { launchImageLibrary} from 'react-native-image-picker';
 export default function Car() {
     const [type, setType] = useState('');
     const [description, setDescription] = useState('');
-    const [photo, setPhoto] = useState([0]);
+    const [photo, setPhoto] = useState('');
 
-
+    
     const saveData = () => {
         fetch('http://localhost:4000/car', {
             method: 'POST',

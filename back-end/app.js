@@ -5,9 +5,9 @@ const login = require('./routes/login')
 const car = require('./routes/car')
 
 const app = express()
-const port = 4000
+const port =  4000;
 
-const url = 'mongodb://localhost/carsale'
+const url = 'mongodb://127.0.0.1/carsale'
 
 mongoose.connect(url, { useNewUrlParser: true })
 const con = mongoose.connection
