@@ -6,10 +6,11 @@ import { launchImageLibrary} from 'react-native-image-picker';
 
 export default function Car() {
     const [type, setType] = useState('');
+    const [price, setPrice] = useState('');
     const [description, setDescription] = useState('');
     const [photo, setPhoto] = useState('');
 
-    
+
     const saveData = () => {
         fetch('http://localhost:4000/car', {
             method: 'POST',
@@ -59,10 +60,11 @@ export default function Car() {
   return (
     <NativeBaseProvider>
             <View style={styles.container}>
-                <Text fontSize="4xl" bold color={'#1763d3'} mt="10%" style={styles.lable}>Add Car</Text>
-                <VStack space={4} alignItems="center" mt="12%">
+                <Text fontSize="4xl" bold color={'#1763d3'} mt="10%" style={styles.lable}>ADD CAR</Text>
+                <VStack space={4} alignItems="center" mt="8%">
                     <Input mx="3" value={type} onChangeText={(e) => { setType(e) }} placeholder="Type" w="80%" />
                     <Input mx="3" value={description} onChangeText={(e) => { setDescription(e) }} placeholder="Description" w="80%" />
+                    <Input mx="3" value={price} onChangeText={(e) => { setPrice(e) }} placeholder="Price" w="80%" />
                     <HStack space={3} alignItems="center" mt="4%">
                         <TouchableOpacity style={styles.touchable} onPress={()=>{console.log("hello");}}>
                             <Image source = {{uri:'data:Image/png;base64,' + photo}}
@@ -107,7 +109,7 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     btn:{  
-        width:155,
+        width:160,
         fontSize:50,
     },
 })

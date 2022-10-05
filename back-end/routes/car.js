@@ -18,6 +18,7 @@ router.post('/', async(req, res) => {
     const posts = new Post({
         type: req.body.type,
         description: req.body.description,
+        price: req.body.price,
         photo: req.body.photo
     })
 
@@ -54,6 +55,7 @@ router.put('/:id', async (req, res) => {
         const post = await Post.findById(req.params.id)
         post.type = req.body.type,
         post.description = req.body.description,
+        post.price = req.body.price
         post.photo = req.body.photo
 
         const response = await post.save()
