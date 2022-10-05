@@ -10,9 +10,9 @@ router.post('/', async(req, res) => {
     try {
         const user = await Login.findOne({ email: req.body.email, password: req.body.password });
 
-        if (!user){
+        if (!user)
             return res.status(401).send({ message: "Invalid Email or Password" });
-        }
+        
 			
         const token = user.generateAuthToken();
 		res.status(200).send({ data: token, message: "logged in successfully" });

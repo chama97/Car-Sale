@@ -5,6 +5,7 @@ import { launchImageLibrary} from 'react-native-image-picker';
 
 export default function CarUpdate({navigation,route}) {
 
+    const [id, setId] = useState('');
     const [type, setType] = useState('');
     const [price, setPrice] = useState('');
     const [description, setDescription] = useState('');
@@ -12,6 +13,7 @@ export default function CarUpdate({navigation,route}) {
 
     useEffect(()=>{
         console.log(route.params.obj)
+        setId(route.params.obj._id)
         setType(route.params.obj.type)
         setPrice(route.params.obj.price)
         setDescription(route.params.obj.description)
@@ -23,6 +25,7 @@ export default function CarUpdate({navigation,route}) {
         fetch('http://192.168.8.166:4000/cars/633d917f7967ccc322b122d7', {
             method: 'PUT',
             body: JSON.stringify({
+                _id: id,
                 type: type,
                 description: description,
                 price: price,
@@ -32,7 +35,7 @@ export default function CarUpdate({navigation,route}) {
                 'Content-type': 'application/json; charset=UTF-8',
             },
         })
-            .then((response) => {Alert.alert("Save Saved Successfully !")})
+            .then((response) => {Alert.alert("Car Updated Successfully !")})
             .catch((err)=>{Alert.alert("Error occured !")})
     }
 
@@ -43,7 +46,7 @@ export default function CarUpdate({navigation,route}) {
     }
 
     const deleteData = () => {
-        fetch('http://192.168.8.166:4000/cars',{
+        fetch('http://192.168.8.166:4000/cars/633d9ad88f2a0962e17eaeec',{
             method:'DELETE',
             body:JSON.stringify({
               id:'633d917f7967ccc322b122d7'
