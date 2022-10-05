@@ -30,7 +30,7 @@ export default function Home({navigation}) {
                         <Text style={{fontSize:17, color:'green'}} >{item.price}</Text>
                     </View>
                     <View style={{flex:6,  backgroundColor:'#e600e6'}}>
-                        <TouchableOpacity style={{height:'100%', backgroundColor:'#ffff'}} onPress={()=>{console.log("hello");}}>
+                        <TouchableOpacity style={{height:'100%', backgroundColor:'#ffff'}} onPress={()=>{navigation.navigate("CarUpdate",{obj:item})}}>
                             <Image source = {{uri:item.photo}}
                                 style = {{ width: '100%', height: '100%' }}
                             />

@@ -4,6 +4,7 @@ import Sign from './screens/Sign'
 import Home from './screens/Home'
 import Car from './screens/Car'
 import Cars from './screens/Cars'
+import CarUpdate from './screens/CarUpdate'
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
@@ -18,6 +19,7 @@ export default function App() {
         <Stack.Screen name="Home" component={Home} />
         <Stack.Screen name="Car" component={Car} />
         <Stack.Screen name="Cars" component={Cars} />
+        <Stack.Screen name="CarUpdate" component={CarUpdate} />
       </Stack.Navigator>
     </NavigationContainer>
 
